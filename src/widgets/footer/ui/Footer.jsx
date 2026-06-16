@@ -48,9 +48,15 @@ export function Footer() {
           >
             {ORG.email}
           </a>
-          <span className="text-[15px] text-ink-muted">
-            {ORG.zip}, {ORG.address}
-          </span>
+          <span className="text-[15px] text-ink-muted">{ORG.address}</span>
+          <a
+            href={ORG.website}
+            target="_blank"
+            rel="noreferrer"
+            className="text-[15px] text-ink-muted no-underline transition-colors hover:text-primary"
+          >
+            mbsi.school
+          </a>
         </div>
 
         <div className="flex flex-col gap-2.5">

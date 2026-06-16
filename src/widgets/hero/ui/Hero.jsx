@@ -51,18 +51,18 @@ export function Hero() {
               Yo‘nalishlar
             </Button>
           </div>
-          <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
-            {STATS.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex flex-col rounded-md border border-line bg-bg-soft px-4 py-4"
-              >
-                <span className="text-2xl font-extrabold leading-none tracking-[-0.5px] text-primary">
-                  {stat.value}ta
-                </span>
-                <span className="mt-2 text-[13px] leading-snug text-ink-muted">
-                  {stat.label}
-                </span>
+          <div className="flex items-center gap-5 sm:gap-6">
+            {STATS.map((stat, i) => (
+              <div key={stat.label} className="flex items-center gap-5 sm:gap-6">
+                {i > 0 && <span className="h-9 w-px bg-line" aria-hidden />}
+                <div className="flex flex-col">
+                  <span className="text-lg font-bold leading-none tracking-[-0.3px] text-ink">
+                    {stat.value}ta
+                  </span>
+                  <span className="mt-1 whitespace-nowrap text-xs leading-snug text-ink-muted">
+                    {stat.label}
+                  </span>
+                </div>
               </div>
             ))}
           </div>

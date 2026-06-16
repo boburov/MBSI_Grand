@@ -25,14 +25,16 @@ export default {
         bronze: '#cd7f32',
       },
       fontFamily: {
-        // FONT TEST: 1 — Inter
+        // mbsi.school platformasidagi font stacki
         sans: [
-          'Inter',
+          'var(--default-font-family, ui-sans-serif, system-ui, sans-serif)',
+          'ui-sans-serif',
           'system-ui',
-          '-apple-system',
-          'Segoe UI',
-          'Roboto',
           'sans-serif',
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+          '"Noto Color Emoji"',
         ],
       },
       borderRadius: {

@@ -3,12 +3,12 @@
 // Grant g'oliblari EMAS — grant hali topshirilmagan. Real ma'lumot tayyor bo'lgach
 // shu fayl yangilanadi.
 
-// ── Statistika ───────────────────────────────────────────
+// ── Statistika (mbsi.school platformasidan — real) ───────
 export const SCHOOL_STATS = [
-  { value: '320+', label: 'O‘quvchilar' },
-  { value: '640', label: 'Ota-ona ishonchi' },
-  { value: '40', label: 'O‘qituvchilar' }, // namuna
-  { value: '150+', label: 'Olimpiada va tanlov g‘oliblari' }, // namuna
+  { value: '2100+', label: 'Faol o‘quvchilar' },
+  { value: '185', label: '2026 bitiruvchilari' },
+  { value: '1320', label: 'O‘rtacha SAT bali' },
+  { value: '1–11', label: 'Sinflar' },
 ]
 
 // ── Yutuqlar (NAMUNA ma'lumot) ───────────────────────────

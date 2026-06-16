@@ -9,6 +9,7 @@ import {
   GraduationCap,
   Users,
   Trophy,
+  BookOpen,
 } from 'lucide-react'
 import { Button, Container } from '../../../shared/ui'
 import { ORG } from '../../../shared/config/org'
@@ -20,10 +21,10 @@ import buildingImg from '../../../assets/building.jpg'
 const BUILDING_IMG = buildingImg
 
 const STATS = [
-  { value: '320+', label: 'O‘quvchilar', Icon: Users },
-  { value: '640', label: 'Ota-ona ishonchi', Icon: Users },
-  { value: '40', label: 'Tajribali ustozlar', Icon: GraduationCap },
-  { value: '150+', label: 'Olimpiada g‘oliblari', Icon: Trophy },
+  { value: '2100+', label: 'Faol o‘quvchilar', Icon: Users },
+  { value: '185', label: '2026 bitiruvchilari', Icon: GraduationCap },
+  { value: '1320', label: 'O‘rtacha SAT bali', Icon: Trophy },
+  { value: '1–11', label: 'Sinflar', Icon: BookOpen },
 ]
 
 const VALUES = [
@@ -54,10 +55,11 @@ export function AboutPage() {
               {ORG.fullName}
             </h1>
             <p className="m-0 mb-5 max-w-[520px] text-lg leading-[1.7] text-ink-muted">
-              {ORG.fullName} — {ORG.district}da joylashgan zamonaviy xususiy
-              ta’lim maskani. Bizda STEM yo‘nalishlari chuqurlashtirilgan
-              dasturlar asosida o‘qitiladi va o‘quvchilar xalqaro imtihonlarga
-              (SAT, IELTS, CEFR) tayyorlanadi.
+              {ORG.fullName} — {ORG.district}, Chinobod shahrida joylashgan
+              zamonaviy ixtisoslashtirilgan STEM maktabi. Bizda 1–11-sinflar
+              STEM yo‘nalishlari chuqurlashtirilgan dasturlar asosida o‘qitiladi
+              va o‘quvchilar xalqaro imtihonlarga (SAT, IELTS, CEFR)
+              tayyorlanadi.
             </p>
             <p className="m-0 mb-8 max-w-[520px] text-lg leading-[1.7] text-ink-muted">
               Bizning maktab tajribali ustozlar, zamonaviy laboratoriyalar va
@@ -83,7 +85,7 @@ export function AboutPage() {
             <div className="absolute bottom-5 left-5 flex items-center gap-2.5 rounded-md bg-white px-5 py-3.5 shadow-card lg:-left-6">
               <MapPin size={20} className="shrink-0 text-primary" />
               <span className="text-sm font-medium leading-snug text-ink">
-                {ORG.district}, Chinobod sh.
+                Chinobod sh., {ORG.district}
               </span>
             </div>
           </div>
@@ -174,7 +176,7 @@ export function AboutPage() {
               </div>
               <span className="text-sm font-semibold text-ink-muted">Manzil</span>
               <span className="text-[15px] font-bold text-ink">
-                {ORG.zip}, {ORG.address}
+                {ORG.address}
               </span>
             </a>
           </div>
