@@ -8,6 +8,7 @@ import {
   Star,
   CheckCircle2,
 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { Button, Container } from '../../../shared/ui'
 import {
   GRANT,
@@ -29,9 +30,6 @@ const TIER = {
   silver: 'border-silver text-[#5a6572] bg-[#f7f8fa]',
   bronze: 'border-bronze text-[#9a5a1e] bg-[#fdf6ef]',
 }
-
-const scrollTo = (id) =>
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 
 export function Grant() {
   return (
@@ -104,7 +102,7 @@ export function Grant() {
         </div>
 
         <div className="text-center mt-12">
-          <Button size="lg" onClick={() => scrollTo('apply')}>
+          <Button as={Link} to="/ariza" size="lg">
             Grantga ariza qoldirish
           </Button>
         </div>

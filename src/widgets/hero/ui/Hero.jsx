@@ -1,4 +1,5 @@
 import { GraduationCap } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { Button, Container } from '../../../shared/ui'
 import { ORG } from '../../../shared/config/org'
 import { GRANT, GRANT_DIRECTIONS } from '../../../shared/config/grant'
@@ -34,8 +35,9 @@ export function Hero() {
           </p>
           <div className="mb-12 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4 lg:mb-14">
             <Button
+              as={Link}
+              to="/ariza"
               size="lg"
-              onClick={() => scrollTo('apply')}
               className="w-full sm:w-auto"
             >
               Grantga ariza qoldirish
@@ -49,15 +51,18 @@ export function Hero() {
               Yo‘nalishlar
             </Button>
           </div>
-          <div className="flex gap-10 sm:gap-14">
+          <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
             {STATS.map((stat) => (
-              <div key={stat.label}>
-                <div className="text-[38px] font-extrabold leading-none tracking-[-1px] text-primary">
-                  {stat.value}
-                </div>
-                <div className="mt-2 max-w-[110px] text-sm leading-snug text-ink-muted">
+              <div
+                key={stat.label}
+                className="flex flex-col rounded-md border border-line bg-bg-soft px-4 py-4"
+              >
+                <span className="text-2xl font-extrabold leading-none tracking-[-0.5px] text-primary">
+                  {stat.value}ta
+                </span>
+                <span className="mt-2 text-[13px] leading-snug text-ink-muted">
                   {stat.label}
-                </div>
+                </span>
               </div>
             ))}
           </div>
@@ -67,7 +72,7 @@ export function Hero() {
           <img
             className="block aspect-[4/5] w-full rounded-lg object-cover shadow-float sm:aspect-[4/3] lg:aspect-[5/6]"
             src={studentsImg}
-            alt="MBSI xususiy maktab o‘quvchilari"
+            alt={`${ORG.fullName} o‘quvchilari`}
           />
           <div className="absolute bottom-5 left-5 flex flex-col rounded-md bg-bg px-5 py-4 shadow-card lg:-left-6 lg:bottom-8">
             <span className="text-xl font-extrabold leading-[1.1] tracking-[-0.5px] text-primary">

@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom'
 import { ORG } from '../../config/org'
 
 export function Logo() {
   return (
-    <a href="#top" className="inline-flex items-center gap-2.5 no-underline">
+    <Link to="/" className="inline-flex items-center gap-2.5 no-underline">
       <img
         className="block h-9 w-9 rounded-md bg-bg-blue p-1.5"
         src="/MBSI.svg"
@@ -16,6 +17,6 @@ export function Logo() {
           Xususiy maktab
         </span>
       </span>
-    </a>
+    </Link>
   )
 }
