@@ -10,9 +10,13 @@ const getInitials = (name) =>
     .join('')
     .toUpperCase()
 
-function ResultCard({ student }) {
+function ResultCard({ student, index }) {
   return (
-    <article className="flex flex-col rounded-lg border border-line bg-white p-6 shadow-soft transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-primary-soft hover:shadow-card">
+    <article
+      data-aos="fade-up"
+      data-aos-delay={(index % 4) * 80}
+      className="flex flex-col rounded-lg border border-line bg-white p-5 shadow-soft transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-primary-soft hover:shadow-card sm:p-6"
+    >
       <div className="mb-4 flex items-center gap-3">
         <div
           className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-[15px] font-bold ${student.color}`}
@@ -41,24 +45,27 @@ export function StudentResults() {
   if (!STUDENT_RESULTS?.length) return null
 
   return (
-    <section className="bg-white py-16 lg:py-24" id="student-results">
+    <section className="bg-white py-12 sm:py-16 lg:py-24" id="student-results">
       <Container>
-        <div className="mx-auto mb-12 max-w-[620px] text-center">
+        <div
+          data-aos="fade-up"
+          className="mx-auto mb-10 max-w-[620px] text-center sm:mb-12"
+        >
           <span className="text-[15px] font-semibold text-primary">
             O‘quvchilar natijalari
           </span>
-          <h2 className="mb-3 mt-2 text-[28px] font-extrabold tracking-[-1px] text-ink lg:text-4xl">
+          <h2 className="mb-3 mt-2 text-[22px] font-extrabold tracking-[-1px] text-ink sm:text-[28px] lg:text-4xl">
             O‘quvchilarimiz yutuqlari
           </h2>
-          <p className="m-0 text-lg text-ink-muted">
+          <p className="m-0 text-base text-ink-muted sm:text-lg">
             Maktabimiz o‘quvchilari olimpiada, imtihon va tanlovlarda
             erishgan natijalar.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {STUDENT_RESULTS.map((student) => (
-            <ResultCard key={student.name} student={student} />
+          {STUDENT_RESULTS.map((student, i) => (
+            <ResultCard key={student.name} student={student} index={i} />
           ))}
         </div>
       </Container>

@@ -24,18 +24,18 @@ const STEPS = [
 export function ApplyPage() {
   return (
     <section
-      className="bg-[radial-gradient(circle_at_15%_0%,_#eef4ff_0%,_transparent_50%)] bg-bg py-16 lg:py-24"
+      className="bg-[radial-gradient(circle_at_15%_0%,_#eef4ff_0%,_transparent_50%)] bg-bg py-12 sm:py-16 lg:py-24"
       id="apply"
     >
-      <Container className="grid grid-cols-1 lg:grid-cols-2 gap-9 lg:gap-16 items-start">
+      <Container className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-9 lg:gap-16 items-start">
         <div>
           <span className="text-primary font-semibold text-[15px]">
             Ariza qoldirish
           </span>
-          <h1 className="text-[28px] lg:text-4xl font-extrabold tracking-[-1px] text-ink mt-2 mb-4">
+          <h1 className="text-[24px] sm:text-[28px] lg:text-4xl font-extrabold tracking-[-1px] text-ink mt-2 mb-4">
             Grantga ariza qoldirish
           </h1>
-          <p className="text-lg leading-relaxed text-ink-muted mb-9">
+          <p className="text-base sm:text-lg leading-relaxed text-ink-muted mb-9">
             {GRANT.totalFund} grant jamg‘armasi. Yo‘nalishingizni tanlang,
             o‘qigan joyingiz va maxsus qobiliyatlaringizni yozib, arizangizni
             qoldiring. Har bir yo‘nalishdan {GRANT.winnersPerDirection} nafar

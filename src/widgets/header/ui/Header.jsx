@@ -38,7 +38,7 @@ export function Header() {
       className="sticky top-0 z-50 border-b border-line/60 bg-white/70 backdrop-blur-xl"
       id="top"
     >
-      <Container className="flex h-14 items-center justify-between gap-6">
+      <Container className="flex h-14 items-center justify-between gap-3 sm:gap-6">
         <Logo />
 
         <nav className="hidden gap-9 md:flex">
@@ -67,7 +67,7 @@ export function Header() {
 
         <button
           type="button"
-          className="flex items-center justify-center rounded-md p-1.5 text-ink md:hidden"
+          className="flex shrink-0 items-center justify-center rounded-md p-1.5 text-ink md:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Menyu"
         >

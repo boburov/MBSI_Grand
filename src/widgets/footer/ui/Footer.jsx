@@ -11,8 +11,8 @@ const NAV_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="bg-bg border-t border-line pt-16 pb-8">
-      <Container className="grid grid-cols-1 gap-8 pb-10 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-10">
+    <footer className="bg-bg border-t border-line pt-12 pb-8 sm:pt-16">
+      <Container className="grid grid-cols-1 gap-8 pb-8 sm:pb-10 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-10">
         <div>
           <Logo />
           <p className="mt-4 max-w-[320px] text-[15px] leading-[1.6] text-ink-muted">
@@ -45,7 +45,7 @@ export function Footer() {
           </a>
           <a
             href={`mailto:${ORG.email}`}
-            className="text-[15px] text-ink-muted no-underline transition-colors hover:text-primary"
+            className="break-all text-[15px] text-ink-muted no-underline transition-colors hover:text-primary"
           >
             {ORG.email}
           </a>

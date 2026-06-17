@@ -6,16 +6,19 @@ const ICONS = [Backpack, BookOpen, GraduationCap]
 
 export function Programs() {
   return (
-    <section className="bg-white py-16 lg:py-24" id="programs">
+    <section className="bg-white py-12 sm:py-16 lg:py-24" id="programs">
       <Container>
-        <div className="mx-auto mb-12 max-w-[620px] text-center">
+        <div
+          data-aos="fade-up"
+          className="mx-auto mb-10 max-w-[620px] text-center sm:mb-12"
+        >
           <span className="text-[15px] font-semibold text-primary">
             Ta’lim bosqichlari
           </span>
-          <h2 className="mb-3 mt-2 text-[28px] font-extrabold tracking-[-1px] text-ink lg:text-4xl">
+          <h2 className="mb-3 mt-2 text-[22px] font-extrabold tracking-[-1px] text-ink sm:text-[28px] lg:text-4xl">
             Har bir bosqich uchun dastur
           </h2>
-          <p className="m-0 text-lg text-ink-muted">
+          <p className="m-0 text-base text-ink-muted sm:text-lg">
             1-sinfdan 11-sinfgacha — har bir yoshga mos, izchil va sifatli
             ta’lim dasturi.
           </p>
@@ -27,7 +30,9 @@ export function Programs() {
             return (
               <article
                 key={p.level}
-                className="flex flex-col rounded-lg border border-line bg-white p-8 transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-primary-soft hover:shadow-card"
+                data-aos="fade-up"
+                data-aos-delay={(i % 3) * 100}
+                className="flex flex-col rounded-lg border border-line bg-white p-5 transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-primary-soft hover:shadow-card sm:p-8"
               >
                 <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-md bg-bg-blue text-primary">
                   <Icon size={28} strokeWidth={2} />

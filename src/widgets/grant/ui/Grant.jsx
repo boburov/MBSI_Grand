@@ -33,11 +33,13 @@ const TIER = {
   bronze: 'border-bronze text-[#9a5a1e] bg-[#fdf6ef]',
 }
 
-function DirectionItem({ dir, isOpen, onToggle }) {
+function DirectionItem({ dir, isOpen, onToggle, index }) {
   const IconComponent = ICONS[dir.value]
 
   return (
     <div
+      data-aos="fade-up"
+      data-aos-delay={(index % 3) * 100}
       className={`overflow-hidden rounded-lg border bg-white transition-colors ${
         isOpen ? 'border-primary-soft shadow-card' : 'border-line'
       }`}
@@ -46,9 +48,9 @@ function DirectionItem({ dir, isOpen, onToggle }) {
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
-        className="flex w-full items-center gap-4 p-5 text-left"
+        className="flex w-full items-center gap-3 p-4 text-left sm:gap-4 sm:p-5"
       >
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-bg-blue text-primary">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-bg-blue text-primary sm:h-12 sm:w-12">
           <IconComponent size={24} strokeWidth={2} />
         </div>
         <div className="min-w-0 flex-1">
@@ -75,7 +77,7 @@ function DirectionItem({ dir, isOpen, onToggle }) {
         }`}
       >
         <div className="overflow-hidden">
-          <div className="border-t border-line px-5 pb-6 pt-5">
+          <div className="border-t border-line px-4 pb-6 pt-5 sm:px-5">
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div>
                 <h4 className="mb-3 flex items-center gap-2 text-[14px] font-bold text-ink">
@@ -132,28 +134,33 @@ export function Grant() {
   return (
     <section
       id="grant"
-      className="py-16 lg:py-24 bg-[radial-gradient(circle_at_80%_0%,_#eef4ff_0%,_transparent_55%)] bg-white"
+      className="py-12 sm:py-16 lg:py-24 bg-[radial-gradient(circle_at_80%_0%,_#eef4ff_0%,_transparent_55%)] bg-white"
     >
       <Container>
-        <div className="text-center max-w-[640px] mx-auto mb-10">
+        <div
+          data-aos="fade-up"
+          className="text-center max-w-[640px] mx-auto mb-10"
+        >
           <span className="text-primary font-semibold text-[15px]">
             Grant dasturi
           </span>
-          <h2 className="text-[28px] lg:text-4xl font-extrabold tracking-[-1px] text-ink mt-2 mb-3">
+          <h2 className="text-[22px] sm:text-[28px] lg:text-4xl font-extrabold tracking-[-1px] text-ink mt-2 mb-3">
             <span className="text-primary">{GRANT.totalFund}</span> grant
             jamg‘armasi
           </h2>
-          <p className="text-lg text-ink-muted m-0">
+          <p className="text-base sm:text-lg text-ink-muted m-0">
             {GRANT_DIRECTIONS.length} ta yo‘nalish, har biridan{' '}
             {GRANT.winnersPerDirection} nafar g‘olib.
           </p>
         </div>
 
         <div className="flex flex-col items-stretch justify-center gap-3 mb-12 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
-          {GRANT_PRIZES.map((prize) => (
+          {GRANT_PRIZES.map((prize, i) => (
             <div
               key={prize.place}
-              className={`flex items-center gap-2.5 font-bold text-[15px] py-3.5 px-6 rounded-md border-[1.5px] sm:inline-flex ${TIER[prize.tier]}`}
+              data-aos="fade-up"
+              data-aos-delay={(i % 3) * 100}
+              className={`flex items-center gap-2.5 font-bold text-[15px] py-3.5 px-5 sm:px-6 rounded-md border-[1.5px] sm:inline-flex ${TIER[prize.tier]}`}
             >
               <Trophy size={22} strokeWidth={2} className="shrink-0" />
               <span>{prize.label}</span>
@@ -172,10 +179,11 @@ export function Grant() {
         </div>
 
         <div className="mx-auto flex max-w-[760px] flex-col gap-3">
-          {GRANT_DIRECTIONS.map((dir) => (
+          {GRANT_DIRECTIONS.map((dir, i) => (
             <DirectionItem
               key={dir.value}
               dir={dir}
+              index={i}
               isOpen={openValue === dir.value}
               onToggle={() =>
                 setOpenValue((prev) => (prev === dir.value ? null : dir.value))

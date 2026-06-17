@@ -20,7 +20,11 @@ const getInitials = (name) =>
 
 function TestimonialCard({ t, index }) {
   return (
-    <article className="flex flex-col rounded-lg border border-line bg-white p-7">
+    <article
+      data-aos="fade-up"
+      data-aos-delay={(index % 3) * 100}
+      className="flex flex-col rounded-lg border border-line bg-white p-5 sm:p-7"
+    >
       <Quote
         size={28}
         strokeWidth={2}
@@ -56,16 +60,19 @@ export function Testimonials() {
   if (!TESTIMONIALS?.length) return null
 
   return (
-    <section className="bg-bg-soft py-16 lg:py-24" id="testimonials">
+    <section className="bg-bg-soft py-12 sm:py-16 lg:py-24" id="testimonials">
       <Container>
-        <div className="mx-auto mb-12 max-w-[620px] text-center">
+        <div
+          data-aos="fade-up"
+          className="mx-auto mb-10 max-w-[620px] text-center sm:mb-12"
+        >
           <span className="text-[15px] font-semibold text-primary">
             G‘oliblar fikri
           </span>
-          <h2 className="mb-3 mt-2 text-[28px] font-extrabold tracking-[-1px] text-ink lg:text-4xl">
+          <h2 className="mb-3 mt-2 text-[22px] font-extrabold tracking-[-1px] text-ink sm:text-[28px] lg:text-4xl">
             O‘tgan yilgi grant g‘oliblari
           </h2>
-          <p className="m-0 text-lg text-ink-muted">
+          <p className="m-0 text-base text-ink-muted sm:text-lg">
             Grant dasturida g‘olib bo‘lgan o‘quvchilar o‘z tajribalari bilan
             o‘rtoqlashadi.
           </p>

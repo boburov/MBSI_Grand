@@ -29,27 +29,32 @@ const DESCRIPTIONS = {
 
 export function Courses() {
   return (
-    <section className="bg-bg-soft py-16 lg:py-24" id="courses">
+    <section className="bg-bg-soft py-12 sm:py-16 lg:py-24" id="courses">
       <Container>
-        <div className="mx-auto mb-14 max-w-[600px] text-center">
+        <div
+          data-aos="fade-up"
+          className="mx-auto mb-10 max-w-[600px] text-center sm:mb-14"
+        >
           <span className="text-[15px] font-semibold text-primary">
             Bizning dasturlar
           </span>
-          <h2 className="mb-3 mt-2 text-3xl font-extrabold tracking-[-1px] text-ink lg:text-[36px]">
+          <h2 className="mb-3 mt-2 text-[22px] font-extrabold tracking-[-1px] text-ink sm:text-3xl lg:text-[36px]">
             Fanlar bo‘yicha ixtisoslashuv
           </h2>
-          <p className="text-lg text-ink-muted">
+          <p className="text-base text-ink-muted sm:text-lg">
             Har bir bosqichda yuqori sifatli ta’lim va amaliy innovatsiya —
             chuqurlashtirilgan dasturlar asosida.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {COURSES.map((course) => {
+          {COURSES.map((course, i) => {
             const IconComponent = ICONS[course.value]
             return (
               <article
                 key={course.value}
-                className="rounded-lg border border-line bg-bg p-8 transition hover:-translate-y-1 hover:border-primary-soft hover:shadow-card"
+                data-aos="fade-up"
+                data-aos-delay={(i % 3) * 100}
+                className="rounded-lg border border-line bg-bg p-5 transition hover:-translate-y-1 hover:border-primary-soft hover:shadow-card sm:p-8"
               >
                 <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-md bg-bg-blue text-primary">
                   <IconComponent size={28} strokeWidth={2} />

@@ -8,16 +8,16 @@ export function ResultsPage() {
   return (
     <>
       {/* Sarlavha */}
-      <section className="bg-[radial-gradient(circle_at_80%_0%,_#eef4ff_0%,_transparent_55%)] bg-white py-16 lg:py-20">
+      <section className="bg-[radial-gradient(circle_at_80%_0%,_#eef4ff_0%,_transparent_55%)] bg-white py-12 sm:py-16 lg:py-20">
         <Container>
-          <div className="mx-auto max-w-[700px] text-center">
+          <div data-aos="fade-up" className="mx-auto max-w-[700px] text-center">
             <span className="text-[15px] font-semibold text-primary">
               Maktab yutuqlari
             </span>
-            <h1 className="mt-2 mb-4 text-[30px] font-extrabold tracking-[-1px] text-ink lg:text-[42px]">
+            <h1 className="mt-2 mb-4 text-[26px] font-extrabold tracking-[-1px] text-ink sm:text-[30px] lg:text-[42px]">
               Bizning natijalarimiz
             </h1>
-            <p className="text-lg leading-relaxed text-ink-muted">
+            <p className="text-base leading-relaxed text-ink-muted sm:text-lg">
               {ORG.fullName} o‘quvchilari yillar davomida olimpiada, tanlov va
               imtihonlarda yuqori natijalarga erishib kelmoqda. Quyida maktabimiz
               statistikasi va asosiy yutuqlari keltirilgan.
@@ -26,12 +26,14 @@ export function ResultsPage() {
 
           {/* Statistika */}
           <div className="mx-auto mt-10 grid max-w-[760px] grid-cols-2 gap-4 sm:grid-cols-4">
-            {SCHOOL_STATS.map((s) => (
+            {SCHOOL_STATS.map((s, i) => (
               <div
                 key={s.label}
-                className="rounded-lg border border-line bg-white px-4 py-5 text-center shadow-soft"
+                data-aos="fade-up"
+                data-aos-delay={(i % 4) * 80}
+                className="rounded-lg border border-line bg-white px-3 py-5 text-center shadow-soft sm:px-4"
               >
-                <div className="text-[30px] font-extrabold leading-none tracking-[-1px] text-primary lg:text-[36px]">
+                <div className="text-[24px] font-extrabold leading-none tracking-[-1px] text-primary sm:text-[30px] lg:text-[36px]">
                   {s.value}
                 </div>
                 <div className="mt-2 text-[13px] leading-snug text-ink-muted">
@@ -44,22 +46,27 @@ export function ResultsPage() {
       </section>
 
       {/* Yutuqlar */}
-      <section className="bg-bg-soft py-12 lg:py-16">
+      <section className="bg-bg-soft py-12 sm:py-12 lg:py-16">
         <Container>
-          <div className="mx-auto mb-10 max-w-[560px] text-center">
+          <div
+            data-aos="fade-up"
+            className="mx-auto mb-10 max-w-[560px] text-center"
+          >
             <span className="text-[15px] font-semibold text-primary">
               Yutuqlarimiz
             </span>
-            <h2 className="mt-2 text-[26px] font-extrabold tracking-[-1px] text-ink lg:text-[32px]">
+            <h2 className="mt-2 text-[24px] font-extrabold tracking-[-1px] text-ink sm:text-[26px] lg:text-[32px]">
               Maktab yutuqlari
             </h2>
           </div>
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {ACHIEVEMENTS.map((item) => (
+            {ACHIEVEMENTS.map((item, i) => (
               <article
                 key={item.id}
-                className="flex flex-col rounded-lg border border-line bg-white p-6 transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-primary-soft hover:shadow-card"
+                data-aos="fade-up"
+                data-aos-delay={(i % 3) * 100}
+                className="flex flex-col rounded-lg border border-line bg-white p-5 transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-primary-soft hover:shadow-card sm:p-6"
               >
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-bg-blue text-primary">
                   <Trophy size={22} strokeWidth={2} />
