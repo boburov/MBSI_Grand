@@ -11,3 +11,30 @@
     @apply bg-bg font-sans text-ink antialiased;
   }
 }
+
+/* Avtomatik aylanuvchi (marquee) karusel */
+@layer utilities {
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      /* Ikki nusxa qo'yiladi; -50% bitta to'liq aylanish */
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
+  }
+
+  .marquee-paused:hover .animate-marquee {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+      animation: none;
+    }
+  }
+}

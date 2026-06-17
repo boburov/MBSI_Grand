@@ -1,14 +1,15 @@
-import { GraduationCap } from 'lucide-react'
+import { GraduationCap, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Button, Container } from '../../../shared/ui'
 import { ORG } from '../../../shared/config/org'
-import { GRANT, GRANT_DIRECTIONS } from '../../../shared/config/grant'
-import studentsImg from '../../../assets/students.jpg'
+import { GRANT } from '../../../shared/config/grant'
 
+// sodiq.school uslubidagi katta, jasur statistika
 const STATS = [
-  { value: `${GRANT_DIRECTIONS.length}`, label: 'Yo‘nalish' },
-  { value: `${GRANT.winnersPerDirection}`, label: 'Har yo‘nalishdan g‘olib' },
-  { value: `${GRANT_DIRECTIONS.length * GRANT.winnersPerDirection}`, label: 'Jami g‘oliblar' },
+  { value: '2100+', label: 'Faol o‘quvchilar' },
+  { value: '1320', label: 'O‘rtacha SAT bali' },
+  { value: '6.5+', label: 'O‘rtacha IELTS' },
+  { value: GRANT.totalFund, label: 'Grant jamg‘armasi', wide: true },
 ]
 
 const scrollTo = (id) =>
@@ -16,70 +17,56 @@ const scrollTo = (id) =>
 
 export function Hero() {
   return (
-    <section className="bg-[radial-gradient(circle_at_20%_0%,_#eef4ff_0%,_transparent_55%)] bg-bg pt-16 pb-20 lg:pt-28 lg:pb-32">
-      <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
-        <div className="flex flex-col items-start">
-          <span className="mb-7 inline-flex items-center gap-2 rounded-full bg-primary-soft px-4 py-2 text-sm font-semibold text-primary">
-            <GraduationCap size={16} strokeWidth={2.2} />
-            {ORG.district} · {ORG.academicYear} o‘quv yili
-          </span>
-          <h1 className="m-0 mb-7 text-[34px] font-extrabold leading-[1.12] tracking-[-1px] text-ink sm:text-[42px] lg:text-[46px]">
-            <span className="text-primary">{GRANT.totalFund}</span> grant —
-            iste’dodingni namoyon et!
-          </h1>
-          <p className="m-0 mb-10 max-w-[500px] text-lg leading-[1.7] text-ink-muted">
-            {ORG.fullName} {GRANT.totalFund} grant jamg‘armasini e’lon qiladi.
-            Har bir yo‘nalishdan {GRANT.winnersPerDirection} nafar g‘olib
-            aniqlanadi. Yo‘nalishingni tanla, qobiliyatingni ko‘rsat va grantga
-            ariza qoldir.
-          </p>
-          <div className="mb-12 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4 lg:mb-14">
-            <Button
-              as={Link}
-              to="/ariza"
-              size="lg"
-              className="w-full sm:w-auto"
-            >
-              Grantga ariza qoldirish
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => scrollTo('grant')}
-              className="w-full sm:w-auto"
-            >
-              Yo‘nalishlar
-            </Button>
-          </div>
-          <div className="flex items-center gap-5 sm:gap-6">
-            {STATS.map((stat, i) => (
-              <div key={stat.label} className="flex items-center gap-5 sm:gap-6">
-                {i > 0 && <span className="h-9 w-px bg-line" aria-hidden />}
-                <div className="flex flex-col">
-                  <span className="text-lg font-bold leading-none tracking-[-0.3px] text-ink">
-                    {stat.value}ta
-                  </span>
-                  <span className="mt-1 whitespace-nowrap text-xs leading-snug text-ink-muted">
-                    {stat.label}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+    <section className="relative overflow-hidden bg-[radial-gradient(circle_at_50%_-10%,_#eef4ff_0%,_transparent_60%)] bg-bg pt-16 pb-16 lg:pt-24 lg:pb-20">
+      <Container className="flex flex-col items-center text-center">
+        <span className="mb-7 inline-flex items-center gap-2 rounded-full border border-primary-soft bg-primary-soft/60 px-4 py-2 text-sm font-semibold text-primary">
+          <GraduationCap size={16} strokeWidth={2.2} />
+          {ORG.district} · {ORG.academicYear} o‘quv yili
+        </span>
+
+        <h1 className="m-0 max-w-[920px] text-[32px] font-extrabold uppercase leading-[1.1] tracking-[-1px] text-ink sm:text-[44px] lg:text-[56px]">
+          O‘quvchilarni dunyoning{' '}
+          <span className="text-primary">TOP universitetlariga</span>{' '}
+          tayyorlovchi maktab
+        </h1>
+
+        <p className="mx-auto mt-6 max-w-[640px] text-lg leading-[1.7] text-ink-muted">
+          {ORG.fullName} — STEM yo‘nalishlari chuqurlashtirilgan, xalqaro
+          imtihonlarga (SAT, IELTS, CEFR) tayyorlovchi zamonaviy maktab. Bu yil{' '}
+          <span className="font-semibold text-ink">{GRANT.totalFund}</span> grant
+          jamg‘armasi e’lon qilindi.
+        </p>
+
+        <div className="mt-9 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row sm:gap-4">
+          <Button as={Link} to="/ariza" size="lg" className="w-full sm:w-auto">
+            Grantga ariza qoldirish
+            <ArrowRight size={18} strokeWidth={2.4} />
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            onClick={() => scrollTo('grant')}
+            className="w-full sm:w-auto"
+          >
+            Yo‘nalishlar
+          </Button>
         </div>
 
-        <div className="relative">
-          <img
-            className="block aspect-[4/5] w-full rounded-lg object-cover shadow-float sm:aspect-[4/3] lg:aspect-[5/6]"
-            src={studentsImg}
-            alt={`${ORG.fullName} o‘quvchilari`}
-          />
-          <div className="absolute bottom-5 left-5 flex flex-col rounded-md bg-bg px-5 py-4 shadow-card lg:-left-6 lg:bottom-8">
-            <span className="text-xl font-extrabold leading-[1.1] tracking-[-0.5px] text-primary">
-              {GRANT.totalFund}
-            </span>
-            <span className="text-sm text-ink-muted">grant jamg‘armasi</span>
-          </div>
+        {/* Katta jasur statistika — sodiq.school uslubi */}
+        <div className="mt-14 grid w-full max-w-[900px] grid-cols-2 gap-px overflow-hidden rounded-lg border border-line bg-line lg:grid-cols-4">
+          {STATS.map((stat) => (
+            <div
+              key={stat.label}
+              className="flex flex-col items-center bg-white px-4 py-7"
+            >
+              <span className="text-[26px] font-extrabold leading-none tracking-[-0.5px] text-primary sm:text-[32px]">
+                {stat.value}
+              </span>
+              <span className="mt-2 text-[13px] font-medium leading-snug text-ink-muted">
+                {stat.label}
+              </span>
+            </div>
+          ))}
         </div>
       </Container>
     </section>

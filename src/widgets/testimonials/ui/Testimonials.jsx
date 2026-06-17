@@ -1,5 +1,5 @@
 import { Quote } from 'lucide-react'
-import { Container } from '../../../shared/ui'
+import { Container, Marquee } from '../../../shared/ui'
 import { TESTIMONIALS } from '../../../shared/config/grant'
 
 const AVATAR_COLORS = [
@@ -17,6 +17,40 @@ const getInitials = (name) =>
     .slice(0, 2)
     .join('')
     .toUpperCase()
+
+function TestimonialCard({ t, index }) {
+  return (
+    <article className="flex w-[340px] shrink-0 flex-col rounded-lg border border-line bg-white p-7">
+      <Quote
+        size={28}
+        strokeWidth={2}
+        className="mb-4 text-primary-soft"
+        style={{ fill: 'currentColor' }}
+      />
+      <p className="mb-6 flex-1 text-[15px] leading-relaxed text-ink">
+        “{t.text}”
+      </p>
+      <div className="flex items-center gap-3 border-t border-line pt-5">
+        <div
+          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[15px] font-bold ${
+            AVATAR_COLORS[index % AVATAR_COLORS.length]
+          }`}
+        >
+          {getInitials(t.name)}
+        </div>
+        <div className="min-w-0">
+          <div className="truncate text-[15px] font-bold text-ink">
+            {t.name}
+          </div>
+          <div className="truncate text-[13px] text-ink-muted">
+            {t.role}
+            {t.year ? ` · ${t.year}` : ''}
+          </div>
+        </div>
+      </div>
+    </article>
+  )
+}
 
 export function Testimonials() {
   if (!TESTIMONIALS?.length) return null
@@ -36,44 +70,16 @@ export function Testimonials() {
             o‘rtoqlashadi.
           </p>
         </div>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <article
-              key={t.name}
-              className="flex flex-col rounded-lg border border-line bg-white p-7"
-            >
-              <Quote
-                size={28}
-                strokeWidth={2}
-                className="mb-4 text-primary-soft"
-                style={{ fill: 'currentColor' }}
-              />
-              <p className="mb-6 flex-1 text-[15px] leading-relaxed text-ink">
-                “{t.text}”
-              </p>
-              <div className="flex items-center gap-3 border-t border-line pt-5">
-                <div
-                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[15px] font-bold ${
-                    AVATAR_COLORS[i % AVATAR_COLORS.length]
-                  }`}
-                >
-                  {getInitials(t.name)}
-                </div>
-                <div className="min-w-0">
-                  <div className="truncate text-[15px] font-bold text-ink">
-                    {t.name}
-                  </div>
-                  <div className="truncate text-[13px] text-ink-muted">
-                    {t.role}
-                    {t.year ? ` · ${t.year}` : ''}
-                  </div>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
       </Container>
+
+      {/* bg-bg-soft fonida fade rangi mos bo'lishi uchun */}
+      <div style={{ '--marquee-fade': '#f5f8ff' }}>
+        <Marquee speed={50}>
+          {TESTIMONIALS.map((t, i) => (
+            <TestimonialCard key={t.name} t={t} index={i} />
+          ))}
+        </Marquee>
+      </div>
     </section>
   )
 }
