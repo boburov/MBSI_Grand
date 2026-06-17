@@ -5,8 +5,9 @@ import { Button, Container, Logo } from '../../../shared/ui'
 
 // Sahifa ichidagi bo'limga o'tish: avval bosh sahifaga, keyin scroll
 const HASH_LINKS = [
+  { id: 'programs', label: 'Dasturlar' },
   { id: 'grant', label: 'Grant' },
-  { id: 'courses', label: 'Yo‘nalishlar' },
+  { id: 'admission', label: 'Qabul' },
 ]
 
 const PAGE_LINKS = [

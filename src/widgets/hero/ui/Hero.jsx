@@ -8,8 +8,8 @@ import { GRANT } from '../../../shared/config/grant'
 const STATS = [
   { value: '2100+', label: 'Faol o‘quvchilar' },
   { value: '1320', label: 'O‘rtacha SAT bali' },
-  { value: '6.5+', label: 'O‘rtacha IELTS' },
-  { value: GRANT.totalFund, label: 'Grant jamg‘armasi', wide: true },
+  { value: '6.5+', label: 'O‘rtacha IELTS bali' },
+  { value: '150+', label: 'Olimpiada g‘oliblari' },
 ]
 
 const scrollTo = (id) =>
@@ -25,16 +25,19 @@ export function Hero() {
         </span>
 
         <h1 className="m-0 max-w-[920px] text-[32px] font-extrabold uppercase leading-[1.1] tracking-[-1px] text-ink sm:text-[44px] lg:text-[56px]">
-          O‘quvchilarni dunyoning{' '}
-          <span className="text-primary">TOP universitetlariga</span>{' '}
-          tayyorlovchi maktab
+          Kelajak{' '}
+          <span className="text-primary">innovatorlarini</span>{' '}
+          tarbiyalaymiz
         </h1>
 
-        <p className="mx-auto mt-6 max-w-[640px] text-lg leading-[1.7] text-ink-muted">
-          {ORG.fullName} — STEM yo‘nalishlari chuqurlashtirilgan, xalqaro
-          imtihonlarga (SAT, IELTS, CEFR) tayyorlovchi zamonaviy maktab. Bu yil{' '}
-          <span className="font-semibold text-ink">{GRANT.totalFund}</span> grant
-          jamg‘armasi e’lon qilindi.
+        <p className="mx-auto mt-6 max-w-[660px] text-lg leading-[1.7] text-ink-muted">
+          {ORG.fullName} — fan, texnologiya, muhandislik va matematika (STEM)
+          yo‘nalishlari bo‘yicha ixtisoslashgan maktab. Ertangi kun yetakchilari,
+          fikrlovchilari va ijodkorlarini tayyorlaymiz. Bu yil{' '}
+          <span className="whitespace-nowrap rounded-md bg-primary px-2.5 py-0.5 font-extrabold text-white shadow-card">
+            {GRANT.totalFund}
+          </span>{' '}
+          grant jamg‘armasi e’lon qilindi.
         </p>
 
         <div className="mt-9 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row sm:gap-4">
@@ -62,7 +65,7 @@ export function Hero() {
               <span className="text-[26px] font-extrabold leading-none tracking-[-0.5px] text-primary sm:text-[32px]">
                 {stat.value}
               </span>
-              <span className="mt-2 text-[13px] font-medium leading-snug text-ink-muted">
+              <span className="mt-2 text-center text-[13px] font-medium leading-snug text-ink-muted">
                 {stat.label}
               </span>
             </div>

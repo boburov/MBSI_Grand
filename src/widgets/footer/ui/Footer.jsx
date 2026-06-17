@@ -16,8 +16,9 @@ export function Footer() {
         <div>
           <Logo />
           <p className="mt-4 max-w-[320px] text-[15px] leading-[1.6] text-ink-muted">
-            {ORG.fullName}. Zamonaviy STEM ta’limi va xalqaro imtihonlarga
-            tayyorgarlik maskani.
+            {ORG.fullName} — fan, texnologiya, muhandislik va matematika (STEM)
+            ta’limi orqali o‘quvchilarni kelajak innovatorlari sifatida
+            tarbiyalaydi.
           </p>
         </div>
 

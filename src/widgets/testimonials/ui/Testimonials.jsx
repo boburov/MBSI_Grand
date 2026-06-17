@@ -1,5 +1,5 @@
 import { Quote } from 'lucide-react'
-import { Container, Marquee } from '../../../shared/ui'
+import { Container } from '../../../shared/ui'
 import { TESTIMONIALS } from '../../../shared/config/grant'
 
 const AVATAR_COLORS = [
@@ -20,7 +20,7 @@ const getInitials = (name) =>
 
 function TestimonialCard({ t, index }) {
   return (
-    <article className="flex w-[340px] shrink-0 flex-col rounded-lg border border-line bg-white p-7">
+    <article className="flex flex-col rounded-lg border border-line bg-white p-7">
       <Quote
         size={28}
         strokeWidth={2}
@@ -70,16 +70,13 @@ export function Testimonials() {
             o‘rtoqlashadi.
           </p>
         </div>
-      </Container>
 
-      {/* bg-bg-soft fonida fade rangi mos bo'lishi uchun */}
-      <div style={{ '--marquee-fade': '#f5f8ff' }}>
-        <Marquee speed={50}>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {TESTIMONIALS.map((t, i) => (
             <TestimonialCard key={t.name} t={t} index={i} />
           ))}
-        </Marquee>
-      </div>
+        </div>
+      </Container>
     </section>
   )
 }

@@ -33,13 +33,14 @@ export function Courses() {
       <Container>
         <div className="mx-auto mb-14 max-w-[600px] text-center">
           <span className="text-[15px] font-semibold text-primary">
-            STEM yo‘nalishlari
+            Bizning dasturlar
           </span>
           <h2 className="mb-3 mt-2 text-3xl font-extrabold tracking-[-1px] text-ink lg:text-[36px]">
             Fanlar bo‘yicha ixtisoslashuv
           </h2>
           <p className="text-lg text-ink-muted">
-            Har bir fan chuqurlashtirilgan dastur va amaliyot asosida o‘qitiladi.
+            Har bir bosqichda yuqori sifatli ta’lim va amaliy innovatsiya —
+            chuqurlashtirilgan dasturlar asosida.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

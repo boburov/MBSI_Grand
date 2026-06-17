@@ -166,7 +166,7 @@ export function Grant() {
             >
               <Trophy size={22} strokeWidth={2} className="shrink-0" />
               <span>{prize.label}</span>
-              <span className="ml-auto text-[17px] font-extrabold sm:ml-0">
+              <span className="ml-auto text-[17px] font-extrabold text-primary sm:ml-0">
                 {prize.amount}
               </span>
             </div>

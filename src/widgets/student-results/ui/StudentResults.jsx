@@ -1,5 +1,5 @@
 import { Award } from 'lucide-react'
-import { Container, Marquee } from '../../../shared/ui'
+import { Container } from '../../../shared/ui'
 import { STUDENT_RESULTS } from '../../../shared/config/students'
 
 const getInitials = (name) =>
@@ -12,7 +12,7 @@ const getInitials = (name) =>
 
 function ResultCard({ student }) {
   return (
-    <article className="flex w-[280px] shrink-0 flex-col rounded-lg border border-line bg-white p-6 shadow-soft">
+    <article className="flex flex-col rounded-lg border border-line bg-white p-6 shadow-soft transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-primary-soft hover:shadow-card">
       <div className="mb-4 flex items-center gap-3">
         <div
           className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-[15px] font-bold ${student.color}`}
@@ -55,16 +55,13 @@ export function StudentResults() {
             erishgan natijalar.
           </p>
         </div>
-      </Container>
 
-      {/* To'liq kenglikda aylanadi (Container'dan tashqarida) */}
-      <div style={{ '--marquee-fade': '#fff' }}>
-        <Marquee speed={45}>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {STUDENT_RESULTS.map((student) => (
             <ResultCard key={student.name} student={student} />
           ))}
-        </Marquee>
-      </div>
+        </div>
+      </Container>
     </section>
   )
 }
