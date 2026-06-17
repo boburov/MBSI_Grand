@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Trophy,
   Dumbbell,
@@ -7,6 +8,7 @@ import {
   BrainCircuit,
   Star,
   CheckCircle2,
+  ChevronDown,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Button, Container } from '../../../shared/ui'
@@ -31,7 +33,110 @@ const TIER = {
   bronze: 'border-bronze text-[#9a5a1e] bg-[#fdf6ef]',
 }
 
+function DirectionItem({ dir, isOpen, onToggle }) {
+  const IconComponent = ICONS[dir.value]
+
+  return (
+    <div
+      className={`overflow-hidden rounded-lg border bg-white transition-colors ${
+        isOpen ? 'border-primary-soft shadow-card' : 'border-line'
+      }`}
+    >
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className="flex w-full items-center gap-4 p-5 text-left"
+      >
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-bg-blue text-primary">
+          <IconComponent size={24} strokeWidth={2} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <h3 className="text-base font-bold text-ink">{dir.label}</h3>
+          <p className="mt-0.5 truncate text-[13.5px] text-ink-muted">
+            {dir.description}
+          </p>
+        </div>
+        <span className="shrink-0 rounded-full bg-primary-soft px-3 py-1 text-[12.5px] font-semibold text-primary max-sm:hidden">
+          {GRANT.winnersPerDirection} g‘olib
+        </span>
+        <ChevronDown
+          size={20}
+          strokeWidth={2.2}
+          className={`shrink-0 text-ink-muted transition-transform duration-200 ${
+            isOpen ? 'rotate-180' : ''
+          }`}
+        />
+      </button>
+
+      <div
+        className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
+          isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div className="border-t border-line px-5 pb-6 pt-5">
+            <p className="mb-5 text-[15px] leading-relaxed text-ink-muted">
+              {dir.description}
+            </p>
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div>
+                <h4 className="mb-3 flex items-center gap-2 text-[14px] font-bold text-ink">
+                  <CheckCircle2 size={16} strokeWidth={2.2} className="text-primary" />
+                  Qatnashish shartlari
+                </h4>
+                <ul className="flex flex-col gap-2">
+                  {dir.conditions.map((c, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2 text-[14px] leading-snug text-ink-muted"
+                    >
+                      <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="mb-3 flex items-center gap-2 text-[14px] font-bold text-ink">
+                  <Trophy size={16} strokeWidth={2.2} className="text-primary" />
+                  Qanday grant yutish mumkin
+                </h4>
+                <ul className="flex flex-col gap-2">
+                  {dir.howToWin.map((h, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2 text-[14px] leading-snug text-ink-muted"
+                    >
+                      <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-6 flex flex-col items-start gap-3 border-t border-line pt-5 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-start gap-2 text-[13.5px] leading-snug text-ink">
+                <span className="font-semibold">Asosiy talab:</span>
+                <span className="text-ink-muted">{dir.requirement}</span>
+              </div>
+              <Button as={Link} to="/ariza" size="sm" className="shrink-0">
+                Shu yo‘nalishda ariza
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function Grant() {
+  const [openValue, setOpenValue] = useState(GRANT_DIRECTIONS[0]?.value ?? null)
+
   return (
     <section
       id="grant"
@@ -68,37 +173,25 @@ export function Grant() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {GRANT_DIRECTIONS.map((dir) => {
-            const IconComponent = ICONS[dir.value]
-            return (
-              <article
-                key={dir.value}
-                className="flex flex-col items-start bg-white border border-line rounded-lg p-7 transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:shadow-card hover:border-primary-soft"
-              >
-                <div className="flex items-center justify-between w-full mb-[18px]">
-                  <div className="w-[52px] h-[52px] rounded-md bg-bg-blue text-primary flex items-center justify-center">
-                    <IconComponent size={26} strokeWidth={2} />
-                  </div>
-                  <span className="text-[13px] font-semibold text-primary bg-primary-soft py-1 px-3 rounded-full">
-                    {GRANT.winnersPerDirection} g‘olib
-                  </span>
-                </div>
-                <h3 className="text-lg font-bold text-ink mb-2">{dir.label}</h3>
-                <p className="text-[15px] leading-relaxed text-ink-muted mb-4">
-                  {dir.description}
-                </p>
-                <div className="flex items-start gap-2 text-[13.5px] leading-normal text-ink mt-auto pt-3.5 border-t border-line w-full">
-                  <CheckCircle2
-                    size={16}
-                    strokeWidth={2}
-                    className="text-primary shrink-0 mt-0.5"
-                  />
-                  <span>{dir.requirement}</span>
-                </div>
-              </article>
-            )
-          })}
+        <div className="mx-auto mb-6 max-w-[760px] text-center">
+          <h3 className="text-xl font-bold text-ink">Yo‘nalishlar</h3>
+          <p className="mt-1.5 text-[15px] text-ink-muted">
+            Yo‘nalishni tanlang — qatnashish shartlari va qanday grant yutish
+            mumkinligini ko‘ring.
+          </p>
+        </div>
+
+        <div className="mx-auto flex max-w-[760px] flex-col gap-3">
+          {GRANT_DIRECTIONS.map((dir) => (
+            <DirectionItem
+              key={dir.value}
+              dir={dir}
+              isOpen={openValue === dir.value}
+              onToggle={() =>
+                setOpenValue((prev) => (prev === dir.value ? null : dir.value))
+              }
+            />
+          ))}
         </div>
 
         <div className="text-center mt-12">
