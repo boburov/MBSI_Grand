@@ -16,9 +16,9 @@ export function Footer() {
         <div>
           <Logo />
           <p className="mt-4 max-w-[320px] text-[15px] leading-[1.6] text-ink-muted">
-            {ORG.fullName} — fan, texnologiya, muhandislik va matematika (STEM)
-            ta’limi orqali o‘quvchilarni kelajak innovatorlari sifatida
-            tarbiyalaydi.
+            {ORG.fullName} — aniq fanlar (STEM) yo‘nalishida chuqurlashtirilgan
+            ta’lim beruvchi va o‘quvchilarni yetuk universitetlarga tayyorlovchi
+            zamonaviy maktab.
           </p>
         </div>
 

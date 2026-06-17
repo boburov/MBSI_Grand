@@ -28,13 +28,13 @@ const STATS = [
 const VALUES = [
   {
     Icon: Target,
-    title: 'Bizning maqsadimiz',
-    text: 'Har bir o‘quvchining iqtidorini ochib berish, zamonaviy STEM ta’limi va xalqaro imtihonlarga puxta tayyorlash orqali kelajak mutaxassislarini tarbiyalash.',
+    title: 'Maqsadimiz',
+    text: 'Har bir o‘quvchining iqtidorini ochib, kelajak mutaxassislarini tayyorlash.',
   },
   {
     Icon: Eye,
-    title: 'Bizning qarashimiz',
-    text: 'Mintaqadagi eng ilg‘or xususiy ta’lim maskaniga aylanish va o‘quvchilarni jahon darajasidagi universitetlarga tayyorlash.',
+    title: 'Qarashimiz',
+    text: 'Mintaqadagi eng ilg‘or maktab bo‘lib, o‘quvchilarni yetuk universitetlarga yo‘naltirish.',
   },
 ]
 
@@ -52,16 +52,10 @@ export function AboutPage() {
             <h1 className="m-0 mb-6 text-[24px] font-extrabold leading-[1.12] tracking-[-1px] text-ink break-words sm:text-[32px] lg:text-[40px]">
               {ORG.fullName}
             </h1>
-            <p className="m-0 mb-5 max-w-[520px] text-base leading-[1.7] text-ink-muted sm:text-lg">
-              {ORG.district}, Chinobod shahrida joylashgan ixtisoslashtirilgan
-              STEM maktabi. 1–11-sinflar uchun chuqurlashtirilgan dasturlar
-              asosida fan, texnologiya, muhandislik va matematika yo‘nalishlarida
-              ta’lim beramiz.
-            </p>
             <p className="m-0 mb-8 max-w-[520px] text-base leading-[1.7] text-ink-muted sm:text-lg">
-              Tajribali ustozlar va zamonaviy laboratoriyalar bilan
-              o‘quvchilarimizni xalqaro imtihonlarga (SAT, IELTS, CEFR) va
-              yetakchi universitetlarga tayyorlaymiz.
+              {ORG.district}, Chinobod shahridagi aniq fanlar (STEM) maktabi.
+              1–11-sinf o‘quvchilarini xalqaro imtihonlar (SAT, IELTS, CEFR) va
+              yetuk universitetlarga tayyorlaymiz.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
               <Button as={Link} to="/ariza" size="lg">

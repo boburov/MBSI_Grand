@@ -33,8 +33,8 @@ export function Hero() {
           className="m-0 max-w-[920px] text-[26px] font-extrabold uppercase leading-[1.12] tracking-[-0.5px] text-ink sm:text-[44px] sm:tracking-[-1px] lg:text-[56px]"
         >
           Kelajak{' '}
-          <span className="text-primary">innovatorlarini</span>{' '}
-          tarbiyalaymiz
+          <span className="text-primary">yetakchilarini</span>{' '}
+          yetishtiramiz
         </h1>
 
         <p
@@ -42,9 +42,9 @@ export function Hero() {
           data-aos-delay="200"
           className="mx-auto mt-5 max-w-[660px] text-[15px] leading-[1.65] text-ink-muted sm:mt-6 sm:text-lg sm:leading-[1.7]"
         >
-          {ORG.fullName} — fan, texnologiya, muhandislik va matematika (STEM)
-          yo‘nalishlari bo‘yicha ixtisoslashgan maktab. Ertangi kun yetakchilari,
-          fikrlovchilari va ijodkorlarini tayyorlaymiz. Bu yil{' '}
+          {ORG.fullName} — aniq fanlar (STEM) yo‘nalishi bo‘yicha
+          ixtisoslashgan maktab. O‘quvchilarni xalqaro imtihonlarga va
+          dunyoning yetuk universitetlariga tayyorlaymiz. Bu yil{' '}
           <span className="inline-block rounded-md bg-primary px-2 py-0.5 font-extrabold text-white shadow-card">
             {GRANT.totalFund}
           </span>{' '}
