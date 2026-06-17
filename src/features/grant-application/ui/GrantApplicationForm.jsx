@@ -10,6 +10,7 @@ import {
   validateGrantStep,
   validateGrantApplication,
 } from '../lib/validation'
+import { formatUzPhone } from '../lib/phone'
 import { sendGrantApplication } from '../api/sendGrantApplication'
 
 const STEPS = [
@@ -26,7 +27,6 @@ const initialValues = {
   age: '',
   fatherName: '',
   motherName: '',
-  guardianName: '',
   socialRegistry: '',
   phone: '',
   // 2-bosqich
@@ -91,6 +91,20 @@ export function GrantApplicationForm() {
     const val = e?.target ? e.target.value : e
     setValues((prev) => ({ ...prev, [field]: val }))
     setErrors((prev) => ({ ...prev, [field]: undefined }))
+  }
+
+  // Telefon raqamni +998 formatida formatlab saqlaymiz
+  const handlePhoneChange = (e) => {
+    const formatted = formatUzPhone(e.target.value)
+    setValues((prev) => ({ ...prev, phone: formatted }))
+    setErrors((prev) => ({ ...prev, phone: undefined }))
+  }
+
+  // Telefon maydoni fokuslanganda +998 prefiksini ko'rsatamiz
+  const handlePhoneFocus = () => {
+    if (!values.phone) {
+      setValues((prev) => ({ ...prev, phone: '+998 ' }))
+    }
   }
 
   const handleNext = () => {
@@ -239,15 +253,6 @@ export function GrantApplicationForm() {
             error={errors.motherName}
           />
 
-          <Input
-            id="guardianName"
-            label="Ota-ona (vasiy) ismi"
-            placeholder="Vasiy / qonuniy vakil ismi"
-            value={values.guardianName}
-            onChange={setField('guardianName')}
-            error={errors.guardianName}
-          />
-
           <RadioGroup
             label="Ijtimoiy reyestrda bormi?"
             name="socialRegistry"
@@ -264,9 +269,11 @@ export function GrantApplicationForm() {
             id="phone"
             label="Telefon raqam"
             type="tel"
+            inputMode="numeric"
             placeholder="+998 90 123 45 67"
             value={values.phone}
-            onChange={setField('phone')}
+            onFocus={handlePhoneFocus}
+            onChange={handlePhoneChange}
             error={errors.phone}
           />
         </>

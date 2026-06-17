@@ -1,6 +1,8 @@
 // Ko'p qadamli grant arizasi uchun bosqichma-bosqich validatsiya.
 // Har bir bosqich uchun alohida tekshiruv, "Keyingi" tugmasida ishlatiladi.
 
+import { isValidUzPhone } from './phone'
+
 function validateStep1(values) {
   const errors = {}
 
@@ -16,16 +18,14 @@ function validateStep1(values) {
 
   if (!values.fatherName.trim()) errors.fatherName = 'Ota ismini kiriting'
   if (!values.motherName.trim()) errors.motherName = 'Ona ismini kiriting'
-  if (!values.guardianName.trim())
-    errors.guardianName = 'Ota-ona (vasiy) ismini kiriting'
 
   if (!values.socialRegistry)
     errors.socialRegistry = 'Ijtimoiy reyestr holatini tanlang'
 
-  if (!values.phone.trim()) {
+  if (!values.phone.trim() || values.phone.replace(/\D/g, '') === '998') {
     errors.phone = 'Telefon raqamingizni kiriting'
-  } else if (values.phone.replace(/\D/g, '').length < 9) {
-    errors.phone = "To'liq raqam kiriting"
+  } else if (!isValidUzPhone(values.phone)) {
+    errors.phone = "To'liq raqam kiriting (+998 XX XXX XX XX)"
   }
 
   return errors

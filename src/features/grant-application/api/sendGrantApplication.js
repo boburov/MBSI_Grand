@@ -42,7 +42,6 @@ function buildMessage(values) {
     `Yoshi: ${escapeHtml(values.age)}`,
     `Ota ismi: ${escapeHtml(values.fatherName)}`,
     `Ona ismi: ${escapeHtml(values.motherName)}`,
-    `Ota-ona (vasiy): ${escapeHtml(values.guardianName)}`,
     `Ijtimoiy reyestr: ${escapeHtml(registry)}`,
     '',
     '📚 <b>Akademik ma‘lumotlar</b>',
