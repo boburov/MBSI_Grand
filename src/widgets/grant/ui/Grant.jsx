@@ -76,10 +76,6 @@ function DirectionItem({ dir, isOpen, onToggle }) {
       >
         <div className="overflow-hidden">
           <div className="border-t border-line px-5 pb-6 pt-5">
-            <p className="mb-5 text-[15px] leading-relaxed text-ink-muted">
-              {dir.description}
-            </p>
-
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div>
                 <h4 className="mb-3 flex items-center gap-2 text-[14px] font-bold text-ink">
@@ -118,12 +114,8 @@ function DirectionItem({ dir, isOpen, onToggle }) {
               </div>
             </div>
 
-            <div className="mt-6 flex flex-col items-start gap-3 border-t border-line pt-5 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex items-start gap-2 text-[13.5px] leading-snug text-ink">
-                <span className="font-semibold">Asosiy talab:</span>
-                <span className="text-ink-muted">{dir.requirement}</span>
-              </div>
-              <Button as={Link} to="/ariza" size="sm" className="shrink-0">
+            <div className="mt-6 border-t border-line pt-5">
+              <Button as={Link} to="/ariza" size="sm">
                 Shu yo‘nalishda ariza
               </Button>
             </div>
@@ -152,9 +144,8 @@ export function Grant() {
             jamg‘armasi
           </h2>
           <p className="text-lg text-ink-muted m-0">
-            {GRANT_DIRECTIONS.length} ta yo‘nalish bo‘yicha tanlov o‘tkaziladi.
-            Har bir yo‘nalishdan {GRANT.winnersPerDirection} nafar g‘olib
-            aniqlanadi va quyidagi mukofotlar bilan taqdirlanadi.
+            {GRANT_DIRECTIONS.length} ta yo‘nalish, har biridan{' '}
+            {GRANT.winnersPerDirection} nafar g‘olib.
           </p>
         </div>
 
@@ -176,8 +167,7 @@ export function Grant() {
         <div className="mx-auto mb-6 max-w-[760px] text-center">
           <h3 className="text-xl font-bold text-ink">Yo‘nalishlar</h3>
           <p className="mt-1.5 text-[15px] text-ink-muted">
-            Yo‘nalishni tanlang — qatnashish shartlari va qanday grant yutish
-            mumkinligini ko‘ring.
+            Yo‘nalishni tanlang va shartlar bilan tanishing.
           </p>
         </div>
 

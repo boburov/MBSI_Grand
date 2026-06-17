@@ -21,106 +21,50 @@ export const GRANT_DIRECTIONS = [
   {
     value: 'sport',
     label: 'Sport',
-    description:
-      'Yengil atletika, jamoaviy va yakkakurash sport turlari bo‘yicha yutuqlar.',
-    requirement:
-      'Viloyat yoki respublika darajasidagi musobaqalarda qatnashganlik dalili.',
-    conditions: [
-      'Rasmiy musobaqalarda qatnashganlikni tasdiqlovchi diplom yoki guvohnoma',
-      'So‘nggi 2 yil ichidagi natijalar hisobga olinadi',
-      'Murabbiy yoki tashkilotchi tavsiyanomasi (ixtiyoriy, qo‘shimcha ball)',
-    ],
-    howToWin: [
-      'Eng yuqori darajadagi (respublika > viloyat > tuman) natijalar afzal',
-      'Sovrinli o‘rinlar va medallar alohida baholanadi',
-      'Komissiya jismoniy tayyorgarlik va izchillikni ham hisobga oladi',
-    ],
+    description: 'Atletika, jamoaviy va yakkakurash sport turlari.',
+    requirement: 'Musobaqalarda qatnashganlik dalili.',
+    conditions: ['Diplom yoki guvohnoma', 'So‘nggi 2 yil natijalari'],
+    howToWin: ['Yuqori daraja afzal', 'Sovrinli o‘rinlar baholanadi'],
   },
   {
     value: 'social-activity',
     label: 'Ijtimoiy faollik',
-    description:
-      'Volontyorlik, jamoat tashabbuslari va ijtimoiy loyihalardagi faollik.',
-    requirement:
-      'Tashkil etilgan tadbir yoki loyihada ishtirok etganlik tasdig‘i.',
-    conditions: [
-      'Volontyorlik yoki ijtimoiy loyihada ishtirokni tasdiqlovchi hujjat',
-      'Loyiha natijasi yoki ta’sirini ko‘rsatuvchi foto/video material',
-      'Tashkilot yoki rahbar tomonidan berilgan tasdiqnoma',
-    ],
-    howToWin: [
-      'Loyihaning jamiyatga real ta’siri va ko‘lami baholanadi',
-      'Tashabbusning muntazamligi (bir martalik emas) muhim',
-      'Yetakchilik roli alohida e’tirof etiladi',
-    ],
+    description: 'Volontyorlik va ijtimoiy loyihalardagi faollik.',
+    requirement: 'Loyihada ishtirok tasdig‘i.',
+    conditions: ['Ishtirokni tasdiqlovchi hujjat', 'Foto/video material'],
+    howToWin: ['Loyiha ta’siri muhim', 'Yetakchilik e’tirof etiladi'],
   },
   {
     value: 'certificate',
     label: 'Sertifikat',
-    description:
-      'IELTS, SAT, CEFR yoki kasbiy yo‘nalishdagi xalqaro/milliy sertifikatlar.',
-    requirement: 'Amaldagi rasmiy sertifikat nusxasi.',
-    conditions: [
-      'Amal qilish muddati tugamagan rasmiy sertifikat',
-      'Sertifikat o‘quvchining o‘ziga tegishli bo‘lishi shart',
-      'Bir nechta sertifikat bo‘lsa, barchasini biriktirish mumkin',
-    ],
-    howToWin: [
-      'Yuqori ball va daraja (masalan IELTS 6.5+, SAT 1300+) afzal',
-      'Xalqaro sertifikatlar milliylarga nisbatan yuqori baholanadi',
-      'Bir nechta yo‘nalishdagi sertifikatlar umumiy ballni oshiradi',
-    ],
+    description: 'IELTS, SAT, CEFR yoki kasbiy sertifikatlar.',
+    requirement: 'Amaldagi sertifikat nusxasi.',
+    conditions: ['Muddati tugamagan sertifikat', 'O‘quvchining o‘ziga tegishli'],
+    howToWin: ['Yuqori ball afzal', 'Xalqaro sertifikat ustun'],
   },
   {
     value: 'creativity',
     label: 'Ijodiylik (video montaj)',
-    description:
-      'Video montaj, dizayn va kontent yaratish bo‘yicha ijodiy ishlar.',
-    requirement: 'Tayyor ishlaringiz (portfolio yoki havola).',
-    conditions: [
-      'Kamida 1–3 ta tayyor ijodiy ish (portfolio yoki havola)',
-      'Ishlar o‘quvchining mustaqil mehnati bo‘lishi kerak',
-      'YouTube, Instagram yoki Google Drive havolasi qabul qilinadi',
-    ],
-    howToWin: [
-      'Ijodiy g‘oya, sifat va texnik mahorat baholanadi',
-      'Original kontent qayta ishlangan materialdan ustun',
-      'Tanlov yoki loyihalardagi yutuqlar qo‘shimcha ball beradi',
-    ],
+    description: 'Video montaj, dizayn va kontent yaratish.',
+    requirement: 'Portfolio yoki havola.',
+    conditions: ['Tayyor ijodiy ishlar', 'Mustaqil mehnat'],
+    howToWin: ['Sifat va mahorat baholanadi', 'Original kontent ustun'],
   },
   {
     value: 'olympiad',
     label: 'Fan olimpiadasi',
-    description: '9–11-sinf o‘quvchilari uchun fan olimpiadalaridagi natijalar.',
-    requirement:
-      'Tuman, viloyat yoki respublika olimpiadasidagi diplom/sovrin.',
-    conditions: [
-      'Olimpiada diplomi yoki sovrinli o‘rin guvohnomasi',
-      '9–11-sinf o‘quvchilari uchun',
-      'So‘nggi o‘quv yili natijalari ustuvor hisobga olinadi',
-    ],
-    howToWin: [
-      'Respublika bosqichi natijalari eng yuqori baholanadi',
-      '1-, 2-, 3-o‘rinlar va sertifikatlar alohida ball oladi',
-      'Bir nechta fandan natija umumiy reytingni oshiradi',
-    ],
+    description: '9–11-sinflar uchun olimpiada natijalari.',
+    requirement: 'Olimpiada diplomi/sovrini.',
+    conditions: ['Diplom yoki guvohnoma', 'So‘nggi yil natijalari'],
+    howToWin: ['Respublika bosqichi ustun', 'Sovrinli o‘rinlar baholanadi'],
   },
   {
     value: 'social-rating',
     label: 'Ijtimoiy reyting',
-    description:
-      'O‘quvchining umumiy faolligi va jamoadagi ijtimoiy reytingi.',
-    requirement: 'Maktab yoki muassasa tomonidan berilgan tavsifnoma.',
-    conditions: [
-      'Maktab yoki muassasa rahbariyatining tavsifnomasi',
-      'O‘quv va intizom ko‘rsatkichlari',
-      'Jamoadagi faollik va obro‘ni tasdiqlovchi ma’lumotlar',
-    ],
-    howToWin: [
-      'Barqaror o‘qish natijalari va namunali xulq baholanadi',
-      'Sinf va maktab hayotidagi faollik hisobga olinadi',
-      'Tengdoshlar va ustozlar e’tirofi qo‘shimcha ball beradi',
-    ],
+    description: 'O‘quvchining umumiy faolligi va reytingi.',
+    requirement: 'Maktab tavsifnomasi.',
+    conditions: ['Rahbariyat tavsifnomasi', 'O‘quv va intizom'],
+    howToWin: ['Barqaror natijalar', 'Faollik e’tirof etiladi'],
   },
 ]
 
