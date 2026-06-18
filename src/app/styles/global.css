@@ -10,6 +10,50 @@
   body {
     @apply bg-bg font-sans text-ink antialiased;
   }
+
+  /* Barcha sarlavhalar Poppins shriftida — minimalist va qalin.
+     Geometrik bo'lgani uchun harflarni biroz zichlashtirib (negative tracking)
+     toza, zamonaviy ko'rinish beramiz. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+}
+
+/* Scroll paydo bo'lish animatsiyasi — nozik, minimalist "fade-up".
+   AOS o'rniga sof CSS + IntersectionObserver (reveal.js) ishlatamiz. Mavjud
+   [data-aos] atributlari shu yerda boshqariladi, shuning uchun komponentlarni
+   o'zgartirmaymiz. Element ekranga kirganda .aos-animate olib paydo bo'ladi.
+   Eng muhimi: element hech qachon ko'rinmas holatda "qotib" qolmaydi —
+   reduced-motion yoki JS ishlamasa quyidagi fallback to'liq ko'rsatadi. */
+[data-aos] {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out;
+  will-change: opacity, transform;
+}
+
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Harakatni kamaytirish rejimida — darrov to'liq ko'rinsin, animatsiyasiz */
+@media (prefers-reduced-motion: reduce) {
+  [data-aos] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* Avtomatik aylanuvchi (marquee) karusel */

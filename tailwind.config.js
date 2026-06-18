@@ -36,6 +36,8 @@ export default {
           '"Segoe UI Symbol"',
           '"Noto Color Emoji"',
         ],
+        // Sarlavhalar uchun Poppins
+        heading: ['"Poppins"', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         sm: '8px',
