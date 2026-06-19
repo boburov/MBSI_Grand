@@ -45,8 +45,12 @@ export function Hero() {
           {ORG.fullName} — aniq fanlar (STEM) yo‘nalishi bo‘yicha
           ixtisoslashgan maktab. O‘quvchilarni xalqaro imtihonlarga va
           dunyoning yetuk universitetlariga tayyorlaymiz. Bu yil{' '}
-          <span className="inline-block rounded-md bg-primary px-2 py-0.5 font-extrabold text-white shadow-card">
-            {GRANT.totalFund}
+          <span className="relative inline-block overflow-hidden rounded-md bg-primary px-2 py-0.5 font-extrabold text-white shadow-card">
+            <span className="relative z-10">{GRANT.totalFund}</span>
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 animate-shine bg-gradient-to-r from-transparent via-white/60 to-transparent"
+            />
           </span>{' '}
           grant jamg‘armasi e’lon qilindi.
         </p>

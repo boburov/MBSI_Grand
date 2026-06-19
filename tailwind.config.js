@@ -52,6 +52,16 @@ export default {
       maxWidth: {
         container: '1140px',
       },
+      keyframes: {
+        // Badge ustidan yaltirab o'tuvchi yorug'lik (React Bits "Shiny Text" uslubi)
+        shine: {
+          '0%': { transform: 'translateX(-150%) skewX(-20deg)' },
+          '55%, 100%': { transform: 'translateX(160%) skewX(-20deg)' },
+        },
+      },
+      animation: {
+        shine: 'shine 3s ease-in-out infinite',
+      },
     },
   },
   plugins: [],

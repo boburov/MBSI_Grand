@@ -3,6 +3,10 @@ const CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID
 
 const API = `https://api.telegram.org/bot${BOT_TOKEN}`
 
+// Telegram cheklovlari
+const MAX_GROUP_SIZE = 10 // bitta media group'dagi maksimal fayl soni
+const MAX_CAPTION = 1024 // media caption uchun maksimal belgi soni
+
 const SOCIAL_REGISTRY_LABELS = {
   yes: 'Ha, ijtimoiy reyestrda bor',
   no: 'Yo‘q, ijtimoiy reyestrda yo‘q',
@@ -61,10 +65,12 @@ function buildMessage(values) {
   ].join('\n')
 }
 
-async function callTelegram(method, formData) {
+async function callTelegram(method, body) {
+  const isForm = body instanceof FormData
   const res = await fetch(`${API}/${method}`, {
     method: 'POST',
-    body: formData,
+    ...(isForm ? {} : { headers: { 'Content-Type': 'application/json' } }),
+    body: isForm ? body : JSON.stringify(body),
   })
   const data = await res.json().catch(() => ({}))
   if (!res.ok || !data.ok) {
@@ -73,8 +79,9 @@ async function callTelegram(method, formData) {
   return data
 }
 
-// Faylni rasm yoki document sifatida yuboradi (caption bilan).
-async function sendFile(file, caption) {
+// Bitta faylni rasm yoki document sifatida yuboradi (caption bilan).
+// Albom faqat 1 ta faylda bo'lib qolgan holatlar uchun.
+async function sendSingleFile(file, caption) {
   const isImage = file.type.startsWith('image/')
   const method = isImage ? 'sendPhoto' : 'sendDocument'
   const field = isImage ? 'photo' : 'document'
@@ -89,7 +96,33 @@ async function sendFile(file, caption) {
   await callTelegram(method, form)
 }
 
-// To'liq grant arizasini Telegram'ga yuboradi: avval matn, keyin barcha fayllar.
+// Bir guruh faylni bitta media group (albom) qilib yuboradi — ya'ni bitta post.
+// caption faqat birinchi faylga biriktiriladi; Telegram albomda shu matnni ko'rsatadi.
+async function sendAlbum(filesChunk, caption) {
+  // Rasm va PDF bitta albomda aralasha olmaydi: agar barchasi rasm bo'lsa "photo",
+  // aks holda hammasini "document" sifatida yuboramiz (baribir bitta post bo'ladi).
+  const allImages = filesChunk.every((f) => f.type.startsWith('image/'))
+  const type = allImages ? 'photo' : 'document'
+
+  const form = new FormData()
+  form.append('chat_id', CHAT_ID)
+
+  const media = filesChunk.map((file, i) => {
+    const attachName = `file${i}`
+    form.append(attachName, file, file.name)
+    return {
+      type,
+      media: `attach://${attachName}`,
+      ...(caption && i === 0 ? { caption, parse_mode: 'HTML' } : {}),
+    }
+  })
+  form.append('media', JSON.stringify(media))
+
+  await callTelegram('sendMediaGroup', form)
+}
+
+// To'liq grant arizasini Telegram'ga BITTA post bo'lib yuboradi:
+// barcha fayllar bitta albomga jamlanadi, ariza matni esa albom caption'i bo'ladi.
 // Muvaffaqiyatda hech narsa qaytarmaydi; xatolikda Error tashlaydi.
 export async function sendGrantApplication(values) {
   if (!BOT_TOKEN || !CHAT_ID) {
@@ -98,28 +131,46 @@ export async function sendGrantApplication(values) {
     )
   }
 
-  const fullName = `${values.firstName} ${values.lastName}`
+  const caption = buildMessage(values)
+  const files = [
+    ...values.certificates,
+    ...values.socialCertificates,
+    ...values.selfie,
+  ]
 
-  // 1) Asosiy ariza matni
-  const textForm = new FormData()
-  textForm.append('chat_id', CHAT_ID)
-  textForm.append('text', buildMessage(values))
-  textForm.append('parse_mode', 'HTML')
-  textForm.append('disable_web_page_preview', 'true')
-  await callTelegram('sendMessage', textForm)
-
-  // 2) Akademik sertifikatlar/fayllar (ketma-ket — Telegram rate-limit uchun)
-  for (const file of values.certificates) {
-    await sendFile(file, `📄 Sertifikat — ${escapeHtml(fullName)}`)
+  // Fayl yo'q bo'lsa — oddiy bitta matnli xabar
+  if (files.length === 0) {
+    await callTelegram('sendMessage', {
+      chat_id: CHAT_ID,
+      text: caption,
+      parse_mode: 'HTML',
+      disable_web_page_preview: true,
+    })
+    return
   }
 
-  // 3) Ijtimoiy faollik sertifikatlari
-  for (const file of values.socialCertificates) {
-    await sendFile(file, `🤝 Ijtimoiy faollik — ${escapeHtml(fullName)}`)
+  // Caption 1024 belgidan oshsa, albomga sig'maydi: matnni alohida xabar qilib
+  // yuboramiz, fayllarni esa captionsiz albom qilamiz (faqat shu kamdan-kam holatda 2 post).
+  const captionFitsInAlbum = caption.length <= MAX_CAPTION
+  if (!captionFitsInAlbum) {
+    await callTelegram('sendMessage', {
+      chat_id: CHAT_ID,
+      text: caption,
+      parse_mode: 'HTML',
+      disable_web_page_preview: true,
+    })
   }
 
-  // 4) Selfi rasm
-  for (const file of values.selfie) {
-    await sendFile(file, `🤳 Selfi — ${escapeHtml(fullName)}`)
+  // Fayllarni 10 talik guruhlarga bo'lamiz (Telegram cheklovi).
+  // Odatda bitta guruh bo'ladi — ya'ni hammasi bitta post bo'lib boradi.
+  for (let i = 0; i < files.length; i += MAX_GROUP_SIZE) {
+    const chunk = files.slice(i, i + MAX_GROUP_SIZE)
+    const chunkCaption = i === 0 && captionFitsInAlbum ? caption : null
+    // Albom kamida 2 ta faylni talab qiladi; 1 ta qolsa alohida yuboramiz.
+    if (chunk.length === 1) {
+      await sendSingleFile(chunk[0], chunkCaption)
+    } else {
+      await sendAlbum(chunk, chunkCaption)
+    }
   }
 }
