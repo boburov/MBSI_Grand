@@ -45,7 +45,7 @@ export function Hero() {
           {ORG.fullName} — aniq fanlar (STEM) yo‘nalishi bo‘yicha
           ixtisoslashgan maktab. O‘quvchilarni xalqaro imtihonlarga va
           dunyoning yetuk universitetlariga tayyorlaymiz. Bu yil{' '}
-          <span className="relative inline-block overflow-hidden rounded-md bg-primary px-2 py-0.5 font-extrabold text-white shadow-card">
+          <span className="relative inline-block overflow-hidden rounded-md bg-primary px-2 py-0.5 align-middle font-extrabold text-white shadow-card">
             <span className="relative z-10">{GRANT.totalFund}</span>
             <span
               aria-hidden="true"

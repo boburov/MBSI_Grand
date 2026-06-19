@@ -33,13 +33,11 @@ const TIER = {
   bronze: 'border-bronze text-[#9a5a1e] bg-[#fdf6ef]',
 }
 
-function DirectionItem({ dir, isOpen, onToggle, index }) {
+function DirectionItem({ dir, isOpen, onToggle }) {
   const IconComponent = ICONS[dir.value]
 
   return (
     <div
-      data-aos="fade-up"
-      data-aos-delay={(index % 3) * 100}
       className={`overflow-hidden rounded-lg border bg-white transition-colors ${
         isOpen ? 'border-primary-soft shadow-card' : 'border-line'
       }`}
@@ -179,11 +177,10 @@ export function Grant() {
         </div>
 
         <div className="mx-auto flex max-w-[760px] flex-col gap-3">
-          {GRANT_DIRECTIONS.map((dir, i) => (
+          {GRANT_DIRECTIONS.map((dir) => (
             <DirectionItem
               key={dir.value}
               dir={dir}
-              index={i}
               isOpen={openValue === dir.value}
               onToggle={() =>
                 setOpenValue((prev) => (prev === dir.value ? null : dir.value))
