@@ -25,6 +25,13 @@ function phoneLink(phone) {
   return `<a href="tel:${clean}">${escapeHtml(phone)}</a>`
 }
 
+// Har bir bo'linib ketgan postga qo'shiladigan qisqa identifikator:
+// ism + telefon raqami — kanalda arizani tez topib olish uchun.
+function buildTag(values) {
+  const fullName = `${values.firstName} ${values.lastName}`
+  return `👤 <b>${escapeHtml(fullName)}</b> · 📞 ${phoneLink(values.phone)}`
+}
+
 function buildMessage(values) {
   const time = new Date().toLocaleString('uz-UZ', {
     day: '2-digit',
@@ -39,6 +46,7 @@ function buildMessage(values) {
 
   return [
     '🎓 <b>YANGI GRANT ARIZASI</b>',
+    buildTag(values),
     '➖➖➖➖➖➖➖➖➖➖',
     '',
     '👤 <b>Shaxsiy ma‘lumotlar</b>',
@@ -132,6 +140,7 @@ export async function sendGrantApplication(values) {
   }
 
   const caption = buildMessage(values)
+  const tag = buildTag(values) // bo'lingan postlar uchun qisqa "ism + telefon" yorlig'i
   const files = [
     ...values.certificates,
     ...values.socialCertificates,
@@ -165,7 +174,9 @@ export async function sendGrantApplication(values) {
   // Odatda bitta guruh bo'ladi — ya'ni hammasi bitta post bo'lib boradi.
   for (let i = 0; i < files.length; i += MAX_GROUP_SIZE) {
     const chunk = files.slice(i, i + MAX_GROUP_SIZE)
-    const chunkCaption = i === 0 && captionFitsInAlbum ? caption : null
+    // Birinchi postga to'liq ariza matni (sig'sa); qolgan har bir bo'lakka esa
+    // hech bo'lmaganda "ism + telefon" yorlig'i — egasiz post qolmasligi uchun.
+    const chunkCaption = i === 0 && captionFitsInAlbum ? caption : tag
     // Albom kamida 2 ta faylni talab qiladi; 1 ta qolsa alohida yuboramiz.
     if (chunk.length === 1) {
       await sendSingleFile(chunk[0], chunkCaption)
