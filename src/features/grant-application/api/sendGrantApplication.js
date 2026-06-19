@@ -20,8 +20,15 @@ function escapeHtml(text) {
 }
 
 function phoneLink(phone) {
+  if (!phone || !String(phone).trim()) return '—'
   const clean = String(phone).replace(/[^\d+]/g, '')
   return `<a href="tel:${clean}">${escapeHtml(phone)}</a>`
+}
+
+// To'ldirilmagan ixtiyoriy maydonlar uchun toza ko'rinish.
+function orDash(value) {
+  const text = String(value ?? '').trim()
+  return text ? escapeHtml(text) : '—'
 }
 
 // Har bir bo'linib ketgan postga qo'shiladigan qisqa identifikator:
@@ -43,8 +50,11 @@ function buildMessage(values) {
     minute: '2-digit',
   })
 
-  const registry =
-    SOCIAL_REGISTRY_LABELS[values.socialRegistry] || values.socialRegistry
+  const registry = values.socialRegistry
+    ? SOCIAL_REGISTRY_LABELS[values.socialRegistry] || values.socialRegistry
+    : '—'
+
+  const fullName = `${values.firstName || ''} ${values.lastName || ''}`.trim()
 
   return [
     '🎓 <b>YANGI GRANT ARIZASI</b>',
@@ -52,21 +62,23 @@ function buildMessage(values) {
     '➖➖➖➖➖➖➖➖➖➖',
     '',
     '👤 <b>Shaxsiy ma‘lumotlar</b>',
-    `Ism familiya: ${escapeHtml(`${values.firstName} ${values.lastName}`)}`,
-    `Yoshi: ${escapeHtml(values.age)}`,
-    `Ota ismi: ${escapeHtml(values.fatherName)}`,
-    `Ona ismi: ${escapeHtml(values.motherName)}`,
+    `Ism familiya: ${orDash(fullName)}`,
+    `Yoshi: ${orDash(values.age)}`,
+    `Ota ismi: ${orDash(values.fatherName)}`,
+    `Ona ismi: ${orDash(values.motherName)}`,
     `Ijtimoiy reyestr: ${escapeHtml(registry)}`,
     '',
     '📚 <b>Akademik ma‘lumotlar</b>',
-    `O‘qigan joyi: ${escapeHtml(values.school)}`,
-    `${escapeHtml(values.academicInfo)}`,
+    `O‘qigan joyi: ${orDash(values.school)}`,
+    `${orDash(values.academicInfo)}`,
     '',
     '🤝 <b>Ijtimoiy faollik</b>',
-    `${escapeHtml(values.socialActivity)}`,
+    `${orDash(values.socialActivity)}`,
     '',
     '💸 <b>Qabul qilinadigan chegirma</b>',
-    `${escapeHtml(values.discount)}% chegirma bo‘lsa o‘qishga tayyor`,
+    values.discount
+      ? `${escapeHtml(values.discount)}% chegirma bo‘lsa o‘qishga tayyor`
+      : '—',
     '',
     '➖➖➖➖➖➖➖➖➖➖',
     `📞 <b>Telefon:</b> ${phoneLink(values.phone)}`,
