@@ -26,9 +26,12 @@ function phoneLink(phone) {
 
 // Har bir bo'linib ketgan postga qo'shiladigan qisqa identifikator:
 // ism + telefon raqami — kanalda arizani tez topib olish uchun.
+// Telefon kelmagan bo'lsa ham fayl egasiz qolmasligi uchun "—" qo'yiladi.
 function buildTag(values) {
-  const fullName = `${values.firstName} ${values.lastName}`
-  return `👤 <b>${escapeHtml(fullName)}</b> · 📞 ${phoneLink(values.phone)}`
+  const fullName = `${values.firstName || ''} ${values.lastName || ''}`.trim()
+  const name = fullName ? escapeHtml(fullName) : 'Noma‘lum'
+  const phone = values.phone ? phoneLink(values.phone) : '—'
+  return `👤 <b>${name}</b>\n📞 ${phone}`
 }
 
 function buildMessage(values) {
@@ -135,7 +138,7 @@ async function sendCategory(catFiles, label, values) {
   if (!catFiles || catFiles.length === 0) return
 
   // Majburiy caption: kategoriya + ism + telefon. Har bir postda takrorlanadi.
-  const caption = `${label}\n${buildTag(values)}`
+  const caption = `<b>${label}</b>\n${buildTag(values)}`
 
   // 10 talik guruhlarga bo'lamiz (Telegram albom cheklovi); har bo'lak — alohida post.
   for (let i = 0; i < catFiles.length; i += MAX_GROUP_SIZE) {
