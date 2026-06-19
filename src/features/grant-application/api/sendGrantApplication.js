@@ -5,7 +5,6 @@ const API = `https://api.telegram.org/bot${BOT_TOKEN}`
 
 // Telegram cheklovlari
 const MAX_GROUP_SIZE = 10 // bitta media group'dagi maksimal fayl soni
-const MAX_CAPTION = 1024 // media caption uchun maksimal belgi soni
 
 const SOCIAL_REGISTRY_LABELS = {
   yes: 'Ha, ijtimoiy reyestrda bor',
@@ -129,8 +128,30 @@ async function sendAlbum(filesChunk, caption) {
   await callTelegram('sendMediaGroup', form)
 }
 
-// To'liq grant arizasini Telegram'ga BITTA post bo'lib yuboradi:
-// barcha fayllar bitta albomga jamlanadi, ariza matni esa albom caption'i bo'ladi.
+// Bitta kategoriyadagi fayllarni yuboradi. HAR BIR postning captioniga
+// MAJBURIY ravishda "kategoriya nomi + ism + telefon" biriktiriladi —
+// shunda kanalda istalgan post kimniki ekani aniq ko'rinadi va egasiz qolmaydi.
+async function sendCategory(catFiles, label, values) {
+  if (!catFiles || catFiles.length === 0) return
+
+  // Majburiy caption: kategoriya + ism + telefon. Har bir postda takrorlanadi.
+  const caption = `${label}\n${buildTag(values)}`
+
+  // 10 talik guruhlarga bo'lamiz (Telegram albom cheklovi); har bo'lak — alohida post.
+  for (let i = 0; i < catFiles.length; i += MAX_GROUP_SIZE) {
+    const chunk = catFiles.slice(i, i + MAX_GROUP_SIZE)
+    if (chunk.length === 1) {
+      await sendSingleFile(chunk[0], caption)
+    } else {
+      await sendAlbum(chunk, caption)
+    }
+  }
+}
+
+// To'liq grant arizasini Telegram'ga yuboradi:
+//   1) Avval to'liq ariza matni (alohida xabar).
+//   2) So'ng fayllar kategoriyalar bo'yicha alohida post bo'lib boradi —
+//      HAR BIR postda ism + telefon raqami majburiy ravishda bo'ladi.
 // Muvaffaqiyatda hech narsa qaytarmaydi; xatolikda Error tashlaydi.
 export async function sendGrantApplication(values) {
   if (!BOT_TOKEN || !CHAT_ID) {
@@ -139,49 +160,16 @@ export async function sendGrantApplication(values) {
     )
   }
 
-  const caption = buildMessage(values)
-  const tag = buildTag(values) // bo'lingan postlar uchun qisqa "ism + telefon" yorlig'i
-  const files = [
-    ...values.certificates,
-    ...values.socialCertificates,
-    ...values.selfie,
-  ]
+  // 1) Asosiy ariza matni (ism + telefon bu matnda ham bor)
+  await callTelegram('sendMessage', {
+    chat_id: CHAT_ID,
+    text: buildMessage(values),
+    parse_mode: 'HTML',
+    disable_web_page_preview: true,
+  })
 
-  // Fayl yo'q bo'lsa — oddiy bitta matnli xabar
-  if (files.length === 0) {
-    await callTelegram('sendMessage', {
-      chat_id: CHAT_ID,
-      text: caption,
-      parse_mode: 'HTML',
-      disable_web_page_preview: true,
-    })
-    return
-  }
-
-  // Caption 1024 belgidan oshsa, albomga sig'maydi: matnni alohida xabar qilib
-  // yuboramiz, fayllarni esa captionsiz albom qilamiz (faqat shu kamdan-kam holatda 2 post).
-  const captionFitsInAlbum = caption.length <= MAX_CAPTION
-  if (!captionFitsInAlbum) {
-    await callTelegram('sendMessage', {
-      chat_id: CHAT_ID,
-      text: caption,
-      parse_mode: 'HTML',
-      disable_web_page_preview: true,
-    })
-  }
-
-  // Fayllarni 10 talik guruhlarga bo'lamiz (Telegram cheklovi).
-  // Odatda bitta guruh bo'ladi — ya'ni hammasi bitta post bo'lib boradi.
-  for (let i = 0; i < files.length; i += MAX_GROUP_SIZE) {
-    const chunk = files.slice(i, i + MAX_GROUP_SIZE)
-    // Birinchi postga to'liq ariza matni (sig'sa); qolgan har bir bo'lakka esa
-    // hech bo'lmaganda "ism + telefon" yorlig'i — egasiz post qolmasligi uchun.
-    const chunkCaption = i === 0 && captionFitsInAlbum ? caption : tag
-    // Albom kamida 2 ta faylni talab qiladi; 1 ta qolsa alohida yuboramiz.
-    if (chunk.length === 1) {
-      await sendSingleFile(chunk[0], chunkCaption)
-    } else {
-      await sendAlbum(chunk, chunkCaption)
-    }
-  }
+  // 2) Fayllar kategoriyalar bo'yicha — har bir postda ism + telefon majburiy
+  await sendCategory(values.certificates, '📄 Sertifikat', values)
+  await sendCategory(values.socialCertificates, '🤝 Ijtimoiy faollik', values)
+  await sendCategory(values.selfie, '🤳 Selfi', values)
 }
