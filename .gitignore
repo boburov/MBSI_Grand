@@ -12,10 +12,14 @@ dist
 dist-ssr
 *.local
 
-# Maxfiy o'zgaruvchilar (Telegram token)
+# Maxfiy o'zgaruvchilar (.env — client va server uchun)
 .env
 .env.*
 !.env.example
+
+# Prisma / NestJS (server)
+server/dist
+server/generated
 
 # Editor directories and files
 .vscode/*

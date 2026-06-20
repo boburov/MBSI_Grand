@@ -1,0 +1,31 @@
+// Grant arizalari uchun Prisma sxemasi.
+// Maydonlar client formasidagi initialValues asosida.
+// Fayl maydonlari (sertifikat/selfi) bu bosqichda saqlanmaydi — keyingi bosqich.
+// Barcha maydonlar ixtiyoriy (frontda hammasi optional bo'lgan).
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model GrantApplication {
+  id             String   @id @default(uuid())
+  firstName      String?
+  lastName       String?
+  age            Int?
+  fatherName     String?
+  motherName     String?
+  socialRegistry String? // "yes" | "no" | ""
+  phone          String?
+  school         String?
+  academicInfo   String?
+  socialActivity String?
+  discount       String? // "25" | "50" | "75" | "100"
+  createdAt      DateTime @default(now())
+
+  @@index([createdAt])
+}
