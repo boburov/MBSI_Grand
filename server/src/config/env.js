@@ -29,9 +29,10 @@ const env = {
     },
   },
 
-  adminSeed: {
-    username: process.env.ADMIN_SEED_USERNAME || '',
-    password: process.env.ADMIN_SEED_PASSWORD || '',
+  // Admin login ma'lumotlari .env'da saqlanadi (bitta admin).
+  admin: {
+    username: required('ADMIN_USERNAME'),
+    password: required('ADMIN_PASSWORD'),
   },
 
   // Yuklangan fayllar papkasi (mutlaq yo'l)

@@ -1,10 +1,8 @@
-const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const env = require('../config/env')
-const Admin = require('../models/Admin')
 const { asyncHandler } = require('../utils/asyncHandler')
 
-// POST /api/auth/login — admin login, JWT qaytaradi.
+// POST /api/auth/login — admin login (.env'dagi credential bilan), JWT qaytaradi.
 const login = asyncHandler(async (req, res) => {
   const { username, password } = req.body || {}
 
@@ -12,24 +10,22 @@ const login = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: 'Login va parolni kiriting.' })
   }
 
-  const admin = await Admin.findOne({
-    username: String(username).trim().toLowerCase(),
-  }).select('+passwordHash')
-
-  const ok = admin && (await bcrypt.compare(password, admin.passwordHash))
+  const ok =
+    String(username).trim() === env.admin.username &&
+    String(password) === env.admin.password
   if (!ok) {
     return res.status(401).json({ message: 'Login yoki parol noto‘g‘ri.' })
   }
 
   const token = jwt.sign(
-    { sub: admin._id.toString(), username: admin.username, role: admin.role },
+    { sub: env.admin.username, username: env.admin.username, role: 'admin' },
     env.jwtSecret,
     { expiresIn: env.jwtExpiresIn },
   )
 
   res.json({
     token,
-    admin: { id: admin._id, username: admin.username, role: admin.role },
+    admin: { username: env.admin.username, role: 'admin' },
   })
 })
 

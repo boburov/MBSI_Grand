@@ -22,11 +22,8 @@ npm install            # ildizdan — barcha workspace'larga
    - `SERVER_URL` — fayl URL bazasi (masalan `http://localhost:3000`).
    - `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHANNEL_ID` — sertifikatlar tushadigan kanal
      (bo'sh qoldirilsa Telegram bosqichi o'tkazib yuboriladi, ariza baribir saqlanadi).
-   - `ADMIN_SEED_USERNAME` + `ADMIN_SEED_PASSWORD` — birinchi admin.
-3. Birinchi admin'ni yarating:
-   ```bash
-   npm run seed --workspace=server
-   ```
+   - `ADMIN_USERNAME` + `ADMIN_PASSWORD` — admin panel login/parol (JWT shu credential bilan
+     beriladi, alohida bazaga yozilmaydi).
 
 ## Ishga tushirish (dev)
 
@@ -38,8 +35,8 @@ npm run dev:server     # faqat server
 
 ## Admin panel
 
-- `http://localhost:5173/admin/login` — seed bilan yaratilgan admin login/parol bilan kiring.
-- `http://localhost:5173/admin` — qoldirilgan arizalar ro'yxati (sertifikat/selfi havolalari bilan).
+- `http://localhost:5173/admin/login` — `.env`dagi `ADMIN_USERNAME`/`ADMIN_PASSWORD` bilan kiring.
+- `http://localhost:5173/admin` — qoldirilgan barcha arizalar ro'yxati (pagination, sertifikat/selfi havolalari bilan).
 
 ## Telegram
 

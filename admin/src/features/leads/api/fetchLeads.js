@@ -1,4 +1,4 @@
-import { getToken, clearToken } from '../../admin-auth'
+import { getToken, clearToken } from '../../auth'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
@@ -11,7 +11,7 @@ export class UnauthorizedError extends Error {
 }
 
 // Leadlar ro'yxatini oladi (himoyalangan). Token yo'q/yaroqsiz bo'lsa UnauthorizedError.
-export async function fetchLeads({ page = 1, limit = 50 } = {}) {
+export async function fetchLeads({ page = 1, limit = 20 } = {}) {
   const token = getToken()
   if (!token) throw new UnauthorizedError()
 

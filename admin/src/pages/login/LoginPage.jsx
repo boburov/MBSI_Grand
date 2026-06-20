@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, Input } from '../../../shared/ui'
-import { login, isAuthed } from '../../../features/admin-auth'
+import { Button, Input } from '../../shared/ui'
+import { login, isAuthed } from '../../features/auth'
 
-export function AdminLoginPage() {
+export function LoginPage() {
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -13,7 +13,7 @@ export function AdminLoginPage() {
   // Allaqachon kirgan bo'lsa to'g'ridan-to'g'ri panelga.
   useEffect(() => {
     if (isAuthed()) {
-      navigate('/admin', { replace: true })
+      navigate('/', { replace: true })
     }
   }, [navigate])
 
@@ -23,7 +23,7 @@ export function AdminLoginPage() {
     setLoading(true)
     try {
       await login({ username, password })
-      navigate('/admin', { replace: true })
+      navigate('/', { replace: true })
     } catch (err) {
       setError(err.message || 'Kirishda xatolik.')
     } finally {
