@@ -11,9 +11,18 @@ function required(name) {
   return value
 }
 
+// Vergul bilan ajratilgan origin ro'yxatini massivga aylantiradi.
+const clientOrigins = (
+  process.env.CLIENT_ORIGIN || 'http://localhost:5173,http://localhost:5174'
+)
+  .split(',')
+  .map((o) => o.trim())
+  .filter(Boolean)
+
 const env = {
   port: Number(process.env.PORT) || 3000,
-  clientOrigin: process.env.CLIENT_ORIGIN || 'http://localhost:5173',
+  // CORS uchun ruxsat etilgan originlar (landing + admin).
+  clientOrigins,
   serverUrl: (process.env.SERVER_URL || 'http://localhost:3000').replace(/\/+$/, ''),
 
   mongoUri: required('MONGODB_URI'),
