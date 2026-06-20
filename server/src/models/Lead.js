@@ -10,8 +10,8 @@ const leadSchema = new mongoose.Schema(
     motherName: { type: String, trim: true },
     socialRegistry: { type: String, enum: ['yes', 'no'] },
 
-    // Kanonik shakl (+998XXXXXXXXX) — uniqueness kaliti.
-    phone: { type: String, required: true, trim: true, unique: true },
+    // Kanonik shakl (+998XXXXXXXXX) — uniqueness kaliti (index quyida e'lon qilingan).
+    phone: { type: String, required: true, trim: true },
     // Foydalanuvchi kiritgan formatlangan ko'rinish (admin panelda ko'rsatish uchun).
     phoneDisplay: { type: String, trim: true },
 
